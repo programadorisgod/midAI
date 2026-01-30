@@ -1,8 +1,8 @@
-import { AIService } from "../interfaces/ai-service";
-import { CerebrasService } from "../services/cerebras/cerebras";
-import { GroqService } from "../services/groq/groq";
-import { GoogleGenAIServices } from "../services/gemini/gemini";
-import { OpenRouterService } from "../services/open-router/open-router";
+import { AIService } from "../interfaces/ai-service.js";
+import { CerebrasService } from "../services/cerebras/cerebras.js";
+import { GroqService } from "../services/groq/groq.js";
+import { GoogleGenAIServices } from "../services/gemini/gemini.js";
+import { OpenRouterService } from "../services/open-router/open-router.js";
 
 let currentIndex = 0;
 

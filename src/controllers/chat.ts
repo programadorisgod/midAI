@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { getAIService } from "../utils/get-ai-service";
+import { getAIService } from "../utils/get-ai-service.js";
 let currentIndex = 0;
 
 export const chatController = async (req: Request, res: Response) => {

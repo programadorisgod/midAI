@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
-import { AIService } from "../../interfaces/ai-service";
-import { Message } from "../../interfaces/messages";
+import { AIService } from "../../interfaces/ai-service.js";
+import { Message } from "../../interfaces/messages.js";
 
 const ai = new GoogleGenAI({});
 

@@ -1,6 +1,6 @@
 import { Groq } from "groq-sdk";
-import { Message } from "../../interfaces/messages";
-import { AIService } from "../../interfaces/ai-service";
+import { Message } from "../../interfaces/messages.js";
+import { AIService } from "../../interfaces/ai-service.js";
 
 const groq = new Groq();
 

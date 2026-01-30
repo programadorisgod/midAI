@@ -1,5 +1,5 @@
 import { type Request, type Response, Router } from "express";
-import { chatController } from "../controllers/chat";
+import { chatController } from "../controllers/chat.js";
 
 const router = Router();
 

@@ -1,6 +1,6 @@
 import Cerebras from "@cerebras/cerebras_cloud_sdk";
-import { AIService } from "../../interfaces/ai-service";
-import { Message } from "../../interfaces/messages";
+import { AIService } from "../../interfaces/ai-service.js";
+import { Message } from "../../interfaces/messages.js";
 
 const cerebras = new Cerebras();
 
