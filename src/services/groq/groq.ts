@@ -1,0 +1,25 @@
+import { Groq } from "groq-sdk";
+import { Message } from "../../interfaces/messages";
+import { AIService } from "../../interfaces/ai-service";
+
+const groq = new Groq();
+
+export class GroqService implements AIService {
+  async Chat(messages: Message[]): Promise<AsyncGenerator<string>> {
+    const chatCompletion = await groq.chat.completions.create({
+      messages,
+      model: "moonshotai/kimi-k2-instruct-0905",
+      temperature: 0.6,
+      max_completion_tokens: 4096,
+      top_p: 1,
+      stream: true,
+      stop: null,
+    });
+
+    return (async function* () {
+      for await (const chunk of chatCompletion) {
+        yield chunk.choices[0]?.delta?.content || "";
+      }
+    })();
+  }
+}

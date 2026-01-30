@@ -1,0 +1,4 @@
+.env
+dist/*
+bun.lock
+node_modules/
