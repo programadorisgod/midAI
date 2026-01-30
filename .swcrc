@@ -1,9 +1,7 @@
 {
- "$schema": "https://swc.rs/schema.json",
   "jsc": {
     "parser": {
-      "syntax": "typescript",
-      "decorators": false
+      "syntax": "typescript"
     },
     "target": "es2022"
   },
