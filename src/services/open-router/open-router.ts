@@ -6,11 +6,12 @@ import { env } from "../../config/env.js";
 const openRouter = new OpenRouter({
   apiKey: env.OPEN_ROUTER_KEY,
 });
+const MODEL = "openai/gpt-oss-120b:free";
 
 export class OpenRouterService implements AIService {
   async Chat(messages: Message[]): Promise<AsyncGenerator<string>> {
     const completion = await openRouter.chat.send({
-      model: "openai/gpt-oss-120b:free",
+      model: MODEL,
       messages,
       stream: true,
       streamOptions: {

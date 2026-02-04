@@ -3,11 +3,12 @@ import { AIService } from "../../interfaces/ai-service.js";
 import { Message } from "../../interfaces/messages.js";
 
 const ai = new GoogleGenAI({});
+const MODEL = "gemini-3-flash-preview";
 
 export class GoogleGenAIServices implements AIService {
   async Chat(messages: Message[]): Promise<AsyncGenerator<string>> {
     const response = await ai.models.generateContentStream({
-      model: "gemini-3-flash-preview",
+      model: MODEL,
       contents: messages.map((msg) => msg.content),
     });
 
