@@ -24,7 +24,11 @@
     "express": "^5.2.1",
     "groq-sdk": "^0.37.0",
     "morgan": "^1.10.1",
-    "zod": "^4.3.6"
+    "openai": "^6.17.0",
+    "zod": "^4.3.6",
+    "@azure-rest/ai-inference": "latest",
+    "@azure/core-auth": "latest",
+    "@azure/core-sse": "latest"
   },
   "devDependencies": {
     "@swc/cli": "^0.7.10",

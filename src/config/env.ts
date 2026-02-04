@@ -5,6 +5,8 @@ const enviroment_variables = z.object({
   CEREBRAS_API_KEY: z.string().min(1, "CEREBRAS_API_KEY is required"),
   GEMINI_API_KEY: z.string().min(1, "GEMINI_API_KEY is required"),
   OPEN_ROUTER_KEY: z.string().min(1, "OPEN_ROUTER_KEY is required"),
+  DEEPSEEK_API_KEY: z.string().min(1, "DEEPSEEK_API_KEY is required"),
+  GITHUB_TOKEN: z.string().min(1, "GITHUB_TOKEN is required"),
   PORT: z
     .string()
     .min(1)
