@@ -2,9 +2,6 @@ import Cerebras from "@cerebras/cerebras_cloud_sdk";
 import { AIService } from "../../interfaces/ai-service.js";
 import { Message } from "../../interfaces/messages.js";
 
-import { config } from "dotenv";
-config();
-
 const cerebras = new Cerebras();
 
 export class CerebrasService implements AIService {

@@ -1,9 +1,10 @@
 import { OpenRouter } from "@openrouter/sdk";
 import { AIService } from "../../interfaces/ai-service.js";
 import { Message } from "../../interfaces/messages.js";
+import { env } from "../../config/env.js";
 
 const openRouter = new OpenRouter({
-  apiKey: process.env.OPEN_ROUTER_KEY,
+  apiKey: env.OPEN_ROUTER_KEY,
 });
 
 export class OpenRouterService implements AIService {
