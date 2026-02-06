@@ -8,16 +8,19 @@ import { GitHubService } from "../services/github/github.js";
 
 let currentIndex = 0;
 
-export const getAIService = () => {
-  const AIServices: AIService[] = [
-    new GitHubService(),
-    //new DeepSeekService(),
-    new CerebrasService(),
-    new GoogleGenAIServices(),
-    new GroqService(),
-    new OpenRouterService(),
-  ];
+const AIServices: AIService[] = [
+  new GitHubService(),
+  //new DeepSeekService(),
+  new CerebrasService(),
+  new GoogleGenAIServices(),
+  new GroqService(),
+  new OpenRouterService(),
+];
+const { length: AIServicesLength } = AIServices;
 
+export { AIServicesLength };
+
+export const getAIService = () => {
   const service = AIServices[currentIndex];
 
   console.log("Using AI Service:", AIServices[currentIndex].constructor.name);
