@@ -1,26 +1,36 @@
 import type { Request, Response } from "express";
-import { getAIService } from "../utils/get-ai-service.js";
-let currentIndex = 0;
+import { getAIService, AIServicesLength } from "../utils/get-ai-service.js";
+import { sendStreamResponse } from "../utils/send-stream-response.js";
 
 export const chatController = async (req: Request, res: Response) => {
   try {
     const { messages } = req.body;
-    if (!messages || !Array.isArray(messages)) {
+    if (!Array.isArray(messages)) {
       return res.status(400).send("Invalid request body");
     }
 
-    const AIservice = getAIService();
-    const stream = await AIservice.Chat(messages);
-    res.setHeader("Content-Type", "text/event-stream");
-    res.setHeader("Cache-Control", "no-cache");
-    res.setHeader("Connection", "keep-alive");
-    res.flushHeaders?.();
+    const MAX_RETRIES = AIServicesLength;
+    let lastReason: string | null = null;
 
-    for await (const chunk of stream) {
-      res.write(chunk);
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      const AIservice = getAIService();
+
+      const [error, stream] = await AIservice.Chat(messages);
+
+      if (!error) {
+        return sendStreamResponse(res, stream);
+      }
+
+      lastReason = error?.reason ?? null;
+
+      if (lastReason === "UNKNOWN_ERROR") {
+        break;
+      }
     }
 
-    res.end();
+    return res
+      .status(500)
+      .send("An error occurred while processing your request");
   } catch (e) {
     console.error("Error in chatController:", e);
     return res.status(500).send("Internal Server Error");
