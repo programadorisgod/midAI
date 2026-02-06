@@ -1,26 +1,37 @@
 import { Groq } from "groq-sdk";
 import { Message } from "../../interfaces/messages.js";
-import { AIService } from "../../interfaces/ai-service.js";
+import { AIService, ChatErrors } from "../../interfaces/ai-service.js";
+import { err, ok, Result } from "../../utils/operation-result.js";
+import { mapError } from "../../utils/mapped-error.js";
 
 const groq = new Groq();
 const MODEL = "moonshotai/kimi-k2-instruct-0905";
 
 export class GroqService implements AIService {
-  async Chat(messages: Message[]): Promise<AsyncGenerator<string>> {
-    const chatCompletion = await groq.chat.completions.create({
-      messages,
-      model: MODEL,
-      temperature: 0.6,
-      max_completion_tokens: 4096,
-      top_p: 1,
-      stream: true,
-      stop: null,
-    });
+  async Chat(
+    messages: Message[],
+  ): Promise<Result<AsyncGenerator<string>, ChatErrors>> {
+    try {
+      const chatCompletion = await groq.chat.completions.create({
+        messages,
+        model: MODEL,
+        temperature: 0.6,
+        max_completion_tokens: 4096,
+        top_p: 1,
+        stream: true,
+        stop: null,
+      });
 
-    return (async function* () {
-      for await (const chunk of chatCompletion) {
-        yield chunk.choices[0]?.delta?.content || "";
-      }
-    })();
+      const generator = (async function* () {
+        for await (const chunk of chatCompletion) {
+          yield chunk.choices[0]?.delta?.content || "";
+        }
+      })();
+
+      return ok(generator);
+    } catch (e: any) {
+      const mapped = mapError<ChatErrors>(e, "Groq");
+      return err(mapped as ChatErrors);
+    }
   }
 }
