@@ -4,16 +4,19 @@ import { Message } from "../../interfaces/messages.js";
 import { env } from "../../config/env.js";
 import { err, ok, Result } from "../../utils/operation-result.js";
 import { mapError } from "../../utils/mapped-error.js";
+import { resolveApiKey } from "../../utils/resolve-apikey.js";
 
-const openRouter = new OpenRouter({
-  apiKey: env.OPEN_ROUTER_KEY,
-});
 const MODEL = "openai/gpt-oss-120b:free";
 
 export class OpenRouterService implements AIService {
   async Chat(
     messages: Message[],
+    apiKey?: string,
   ): Promise<Result<AsyncGenerator<string>, ChatErrors>> {
+    const openRouter = new OpenRouter({
+      apiKey: resolveApiKey("OPEN_ROUTER_KEY", apiKey),
+    });
+
     try {
       const completion = await openRouter.chat.send({
         model: MODEL,

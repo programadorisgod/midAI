@@ -6,6 +6,7 @@ import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
 import { createSseStream } from "@azure/core-sse";
 import { err, ok, Result } from "../../utils/operation-result";
 import { mapError } from "../../utils/mapped-error";
+import { resolveApiKey } from "../../utils/resolve-apikey";
 
 const MODELS = [
   "openai/gpt-4o-mini",
@@ -18,16 +19,18 @@ const MODELS = [
 ];
 
 const ENDPOINT = "https://models.github.ai/inference";
-const TOKEN = env.GITHUB_TOKEN;
-const client = ModelClient(ENDPOINT, new AzureKeyCredential(TOKEN));
+
 let currentModel = 0;
 const DONE = "[DONE]";
 
 export class GitHubService implements AIService {
   async Chat(
     messages: Message[],
+    apiKey?: string,
   ): Promise<Result<AsyncGenerator<string>, ChatErrors>> {
     try {
+      const TOKEN = resolveApiKey("GITHUB_TOKEN", apiKey);
+      const client = ModelClient(ENDPOINT, new AzureKeyCredential(TOKEN));
       const modelName = MODELS[currentModel];
       currentModel = (currentModel + 1) % MODELS.length;
 

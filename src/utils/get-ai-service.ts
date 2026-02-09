@@ -10,22 +10,22 @@ let currentIndex = 0;
 
 const AIServices: AIService[] = [
   new GitHubService(),
-  //new DeepSeekService(),
   new CerebrasService(),
   new GoogleGenAIServices(),
   new GroqService(),
   new OpenRouterService(),
+  //new DeepSeekService(),
 ];
 const { length: AIServicesLength } = AIServices;
 
 export { AIServicesLength };
 
-export const getAIService = () => {
+export const getAIService = (): [AIService, number] => {
   const service = AIServices[currentIndex];
 
-  console.log("Using AI Service:", AIServices[currentIndex].constructor.name);
+  console.log("Using AI Service:", service.constructor.name);
 
   currentIndex = (currentIndex + 1) % AIServices.length;
 
-  return service;
+  return [service, currentIndex];
 };

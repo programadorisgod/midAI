@@ -13,12 +13,18 @@ export const chatController = async (req: Request, res: Response) => {
     let lastReason: string | null = null;
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-      const AIservice = getAIService();
+      const [AIservice, currentIndexAIService] = getAIService();
 
       const [error, stream] = await AIservice.Chat(messages);
 
       if (!error) {
-        return sendStreamResponse(res, stream);
+        return sendStreamResponse(
+          res,
+          stream,
+          currentIndexAIService,
+          AIServicesLength,
+          AIservice.constructor.name,
+        );
       }
 
       lastReason = error?.reason ?? null;

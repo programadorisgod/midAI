@@ -11,5 +11,6 @@ export type ChatErrors = {
 export interface AIService {
   Chat(
     messages: Message[],
+    apiKey?: string,
   ): Promise<Result<AsyncGenerator<string>, ChatErrors>>;
 }

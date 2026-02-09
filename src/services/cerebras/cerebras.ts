@@ -3,15 +3,20 @@ import { AIService, ChatErrors } from "../../interfaces/ai-service.js";
 import { Message } from "../../interfaces/messages.js";
 import { err, ok, Result } from "../../utils/operation-result.js";
 import { mapError } from "../../utils/mapped-error.js";
+import { resolveApiKey } from "../../utils/resolve-apikey.js";
 
-const cerebras = new Cerebras();
 const MODEL = "zai-glm-4.7";
 
 export class CerebrasService implements AIService {
   async Chat(
     messages: Message[],
+    apiKey?: string,
   ): Promise<Result<AsyncGenerator<string>, ChatErrors>> {
     try {
+      const cerebras = new Cerebras({
+        apiKey: resolveApiKey("CEREBRAS_API_KEY", apiKey),
+      });
+
       const stream = (await cerebras.chat.completions.create({
         messages,
         model: MODEL,
@@ -32,6 +37,7 @@ export class CerebrasService implements AIService {
 
       return ok(generator);
     } catch (e: any) {
+      console.log("Cerebras error:", e);
       const mapped = mapError<ChatErrors>(e, "Cerebras");
       return err(mapped as ChatErrors);
     }

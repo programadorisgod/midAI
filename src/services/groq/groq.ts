@@ -3,14 +3,19 @@ import { Message } from "../../interfaces/messages.js";
 import { AIService, ChatErrors } from "../../interfaces/ai-service.js";
 import { err, ok, Result } from "../../utils/operation-result.js";
 import { mapError } from "../../utils/mapped-error.js";
+import { resolveApiKey } from "../../utils/resolve-apikey.js";
 
-const groq = new Groq();
 const MODEL = "moonshotai/kimi-k2-instruct-0905";
 
 export class GroqService implements AIService {
   async Chat(
     messages: Message[],
+    apikey?: string,
   ): Promise<Result<AsyncGenerator<string>, ChatErrors>> {
+    const groq = new Groq({
+      apiKey: resolveApiKey("GROQ_API_KEY", apikey),
+    });
+
     try {
       const chatCompletion = await groq.chat.completions.create({
         messages,

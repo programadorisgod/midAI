@@ -1,12 +1,12 @@
 import z from "zod";
 
 const enviroment_variables = z.object({
-  GROQ_API_KEY: z.string().min(1, "GROQ_API_KEY is required"),
-  CEREBRAS_API_KEY: z.string().min(1, "CEREBRAS_API_KEY is required"),
-  GEMINI_API_KEY: z.string().min(1, "GEMINI_API_KEY is required"),
-  OPEN_ROUTER_KEY: z.string().min(1, "OPEN_ROUTER_KEY is required"),
-  DEEPSEEK_API_KEY: z.string().min(1, "DEEPSEEK_API_KEY is required"),
-  GITHUB_TOKEN: z.string().min(1, "GITHUB_TOKEN is required"),
+  GROQ_API_KEY: z.string(),
+  CEREBRAS_API_KEY: z.string(),
+  GEMINI_API_KEY: z.string(),
+  OPEN_ROUTER_KEY: z.string(),
+  DEEPSEEK_API_KEY: z.string(),
+  GITHUB_TOKEN: z.string(),
   PORT: z
     .string()
     .min(1)
