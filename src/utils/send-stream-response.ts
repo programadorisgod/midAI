@@ -12,7 +12,7 @@ export const sendStreamResponse = async (
   res.setHeader("Connection", "keep-alive");
   res.flushHeaders?.();
 
-  const metaData = `\n\n [META] Service: ${serviceName || "Unknown"}, Index: ${currentIndexAIService}, Total Services: ${lengthAIService}\n`;
+  const metaData = `\n\n [META] Index: ${currentIndexAIService}, Total Services: ${lengthAIService}\n`;
 
   res.write(metaData);
 
