@@ -23,7 +23,6 @@ export const chatController = async (req: Request, res: Response) => {
           stream,
           currentIndexAIService,
           AIServicesLength,
-          AIservice.constructor.name,
         );
       }
 
