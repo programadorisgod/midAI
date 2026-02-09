@@ -1,7 +1,7 @@
 import { AzureKeyCredential } from "@azure/core-auth";
 import { AIService, ChatErrors } from "../../interfaces/ai-service";
 import { Message } from "../../interfaces/messages";
-import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
+import ModelClient from "@azure-rest/ai-inference";
 import { createSseStream } from "@azure/core-sse";
 import { err, ok, Result } from "../../utils/operation-result";
 import { mapError } from "../../utils/mapped-error";
