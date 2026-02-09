@@ -3,17 +3,19 @@ import { AIService, ChatErrors } from "../../interfaces/ai-service.js";
 import { Message } from "../../interfaces/messages.js";
 import { err, ok, Result } from "../../utils/operation-result.js";
 import { mapError } from "../../utils/mapped-error.js";
-import { resolveApiKey } from "../../utils/resolve-apikey.js";
+import { env } from "../../config/env.js";
+import { AIProvider } from "../../interfaces/provider.js";
 
 const MODEL = "gemini-3-flash-preview";
 
 export class GoogleGenAIServices implements AIService {
+  readonly provider: AIProvider = "gemini";
   async Chat(
     messages: Message[],
-    apiKey?: string,
+    apiKeys?: Partial<Record<AIProvider, string>>,
   ): Promise<Result<AsyncGenerator<string>, ChatErrors>> {
     const ai = new GoogleGenAI({
-      apiKey: resolveApiKey("GEMINI_API_KEY", apiKey),
+      apiKey: apiKeys?.gemini || env.GEMINI_API_KEY,
     });
 
     try {

@@ -3,18 +3,20 @@ import { AIService, ChatErrors } from "../../interfaces/ai-service.js";
 import { Message } from "../../interfaces/messages.js";
 import { err, ok, Result } from "../../utils/operation-result.js";
 import { mapError } from "../../utils/mapped-error.js";
-import { resolveApiKey } from "../../utils/resolve-apikey.js";
+import { env } from "../../config/env.js";
+import { AIProvider } from "../../interfaces/provider.js";
 
 const MODEL = "zai-glm-4.7";
 
 export class CerebrasService implements AIService {
+  readonly provider: AIProvider = "cerebras";
   async Chat(
     messages: Message[],
-    apiKey?: string,
+    apiKeys?: Partial<Record<AIProvider, string>>,
   ): Promise<Result<AsyncGenerator<string>, ChatErrors>> {
     try {
       const cerebras = new Cerebras({
-        apiKey: resolveApiKey("CEREBRAS_API_KEY", apiKey),
+        apiKey: apiKeys?.cerebras || env.CEREBRAS_API_KEY,
       });
 
       const stream = (await cerebras.chat.completions.create({

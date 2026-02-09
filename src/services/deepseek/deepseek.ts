@@ -3,18 +3,21 @@ import { AIService, ChatErrors } from "../../interfaces/ai-service.js";
 import { Message } from "../../interfaces/messages.js";
 import { err, ok, Result } from "../../utils/operation-result.js";
 import { mapError } from "../../utils/mapped-error.js";
-import { resolveApiKey } from "../../utils/resolve-apikey.js";
+import { env } from "../../config/env.js";
+import { AIProvider } from "../../interfaces/provider.js";
 
 const MODEL = "deepseek-chat";
 
 export class DeepSeekService implements AIService {
+  readonly provider: AIProvider = "deepseek";
+
   async Chat(
     messages: Message[],
-    apiKey?: string,
+    apiKeys?: Partial<Record<AIProvider, string>>,
   ): Promise<Result<AsyncGenerator<string>, ChatErrors>> {
     const openai = new OpenAI({
       baseURL: "https://api.deepseek.com/v1",
-      apiKey: resolveApiKey("DEEPSEEK_API_KEY", apiKey),
+      apiKey: apiKeys?.deepseek || env.DEEPSEEK_API_KEY,
     });
     try {
       const completion = await openai.chat.completions.create({
