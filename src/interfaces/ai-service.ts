@@ -1,5 +1,6 @@
 import { Result } from "../utils/operation-result.js";
 import { Message } from "./messages.js";
+import { AIProvider } from "./provider.js";
 
 export type ChatErrors = {
   reason:
@@ -8,9 +9,11 @@ export type ChatErrors = {
     | "TOO_MANY_REQUEST"
     | "UNKNOWN_ERROR";
 };
+
 export interface AIService {
+  readonly provider: AIProvider;
   Chat(
     messages: Message[],
-    apiKey?: string,
+    apiKeys?: Partial<Record<AIProvider, string>>,
   ): Promise<Result<AsyncGenerator<string>, ChatErrors>>;
 }
