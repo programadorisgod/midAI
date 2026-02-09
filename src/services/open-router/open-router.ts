@@ -1,7 +1,6 @@
 import { OpenRouter } from "@openrouter/sdk";
 import { AIService, ChatErrors } from "../../interfaces/ai-service.js";
 import { Message } from "../../interfaces/messages.js";
-import { env } from "../../config/env.js";
 import { err, ok, Result } from "../../utils/operation-result.js";
 import { mapError } from "../../utils/mapped-error.js";
 import { resolveApiKey } from "../../utils/resolve-apikey.js";

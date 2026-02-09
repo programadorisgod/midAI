@@ -1,5 +1,4 @@
 import { AzureKeyCredential } from "@azure/core-auth";
-import { env } from "../../config/env";
 import { AIService, ChatErrors } from "../../interfaces/ai-service";
 import { Message } from "../../interfaces/messages";
 import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
