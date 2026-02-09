@@ -5,7 +5,6 @@ export const sendStreamResponse = async (
   stream: AsyncGenerator<string, any, any>,
   currentIndexAIService: number,
   lengthAIService: number,
-  serviceName?: string,
 ) => {
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
