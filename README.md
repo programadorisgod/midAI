@@ -3,7 +3,8 @@
 MID AI is a project created from the need to have a tool that would allow me to have an artificial intelligence API for university projects, prototypes or personal small projects, but quickly, No registration, no need to associate my credit card and so on.
 
 
-> [!IMPORTANT]: The project is designed for prototypes and academic/personal use, so it may not be suitable for production environments or high-demand applications without further modifications and optimizations.
+> [!IMPORTANT]
+> The project is designed for prototypes and academic/personal use, so it may not be suitable for production environments or high-demand applications without further modifications and optimizations.
 
 
 ## Quick start
