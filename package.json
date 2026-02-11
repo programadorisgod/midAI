@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": " dotenvx run -- tsx --watch src/index.ts",
     "build": "swc src -d dist",
-    "start": "tsx --watch src/index.ts"
+    "start": "tsx --watch src/index.ts",
+    "encrypt": "dotenvx encrypt"
   },
   "keywords": [],
   "author": "",
