@@ -6,7 +6,7 @@ import { mapError } from "../../utils/mapped-error.js";
 import { env } from "../../config/env.js";
 import { AIProvider } from "../../interfaces/provider.js";
 
-const MODEL = "zai-glm-4.7";
+const MODEL = "gpt-oss-120b";
 
 export class CerebrasService implements AIService {
   readonly provider: AIProvider = "cerebras";
