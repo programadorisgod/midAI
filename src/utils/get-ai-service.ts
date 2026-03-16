@@ -10,10 +10,10 @@ let currentIndex = 0;
 
 const AIServices: AIService[] = [
   new GitHubService(),
-  new CerebrasService(),
   new GoogleGenAIServices(),
   new GroqService(),
   new OpenRouterService(),
+  // new CerebrasService(),
   //new DeepSeekService(),
 ];
 const { length: AIServicesLength } = AIServices;
