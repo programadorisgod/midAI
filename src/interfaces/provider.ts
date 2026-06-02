@@ -4,4 +4,5 @@ export type AIProvider =
   | "gemini"
   | "groq"
   | "openrouter"
-  | "deepseek";
+  | "deepseek"
+  | "freellmapi";

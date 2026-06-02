@@ -4,11 +4,13 @@ import { GroqService } from "../services/groq/groq.js";
 import { GoogleGenAIServices } from "../services/gemini/gemini.js";
 import { OpenRouterService } from "../services/open-router/open-router.js";
 //import { DeepSeekService } from "../services/deepseek/deepseek.js";
+import { FreeLlmApiService } from "../services/free-llm-api/free-llm-api.js";
 import { GitHubService } from "../services/github/github.js";
 
 let currentIndex = 0;
 
 const AIServices: AIService[] = [
+  new FreeLlmApiService(),
   new GitHubService(),
   new GoogleGenAIServices(),
   new GroqService(),

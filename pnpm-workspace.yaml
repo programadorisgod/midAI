@@ -1,0 +1,6 @@
+allowBuilds:
+  '@google/genai': true
+  '@openrouter/sdk': true
+  '@swc/core': true
+  esbuild: true
+  protobufjs: false

@@ -6,6 +6,8 @@ const enviroment_variables = z.object({
   GEMINI_API_KEY: z.string(),
   OPEN_ROUTER_KEY: z.string(),
   DEEPSEEK_API_KEY: z.string(),
+  FREE_LLM_API_ENDPOINT: z.string(),
+  FREE_LLM_API_KEY: z.string(),
   GITHUB_TOKEN: z.string(),
   PORT: z
     .string()

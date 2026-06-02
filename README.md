@@ -1,6 +1,8 @@
 # MID AI
+###### Is an AI provider proxy/aggregator
 
 MID AI is a project created from the need to have a tool that would allow me to have an artificial intelligence API for university projects, prototypes or personal small projects, but quickly, No registration, no need to associate my credit card and so on.
+
 
 
 > [!IMPORTANT]
