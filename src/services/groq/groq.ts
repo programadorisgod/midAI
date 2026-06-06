@@ -6,7 +6,7 @@ import { mapError } from "../../utils/mapped-error.js";
 import { env } from "../../config/env.js";
 import { AIProvider } from "../../interfaces/provider.js";
 
-const MODEL = "moonshotai/kimi-k2-instruct-0905";
+const MODEL = "openai/gpt-oss-120b";
 
 export class GroqService implements AIService {
   readonly provider: AIProvider = "groq";
@@ -37,6 +37,7 @@ export class GroqService implements AIService {
 
       return ok(generator);
     } catch (e: any) {
+        console.log(e)
       const mapped = mapError<ChatErrors>(e, "Groq");
       return err(mapped as ChatErrors);
     }

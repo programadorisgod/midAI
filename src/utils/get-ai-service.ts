@@ -10,24 +10,24 @@ import { GitHubService } from "../services/github/github.js";
 let currentIndex = 0;
 
 const AIServices: AIService[] = [
-  new FreeLlmApiService(),
-  new GitHubService(),
-  new GoogleGenAIServices(),
-  new GroqService(),
-  new OpenRouterService(),
-  // new CerebrasService(),
-  //new DeepSeekService(),
+    // new FreeLlmApiService(),
+    // new GitHubService(),
+    new GoogleGenAIServices(),
+    new GroqService(),
+    new OpenRouterService(),
+    // new CerebrasService(),
+    //new DeepSeekService(),
 ];
 const { length: AIServicesLength } = AIServices;
 
 export { AIServicesLength };
 
 export const getAIService = () => {
-  const service = AIServices[currentIndex];
+    const service = AIServices[currentIndex];
 
-  console.log("Using AI Service:", service.constructor.name);
+    console.log("Using AI Service:", service.constructor.name);
 
-  currentIndex = (currentIndex + 1) % AIServices.length;
+    currentIndex = (currentIndex + 1) % AIServices.length;
 
-  return service;
+    return service;
 };
