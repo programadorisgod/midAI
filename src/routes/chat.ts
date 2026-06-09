@@ -5,8 +5,14 @@ const router = Router();
 
 const PREFIX = "/chat";
 
+router.get(`${PREFIX}/health`, (req: Request, res: Response) => {
+    return res.json({
+        status: "OK",
+    });
+});
+
 router.post(`${PREFIX}`, (req: Request, res: Response) =>
-  ChatController.Chat(req, res),
+    ChatController.Chat(req, res),
 );
 
 export { router as chatRouter };
