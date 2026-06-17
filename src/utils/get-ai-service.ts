@@ -12,7 +12,7 @@ let currentIndex = 0;
 const AIServices: AIService[] = [
     // new FreeLlmApiService(),
     // new GitHubService(),
-    new GoogleGenAIServices(),
+    // new GoogleGenAIServices(),
     new GroqService(),
     new OpenRouterService(),
     // new CerebrasService(),
